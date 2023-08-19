@@ -8,8 +8,43 @@ forge script script/DeployFarming.s.sol:DeployFarming --rpc-url base_goerli --br
 forge script script/DeployOracle.s.sol:DeployOracle --rpc-url base_goerli --broadcast --verify
 forge script script/DeployPool.s.sol:DeployPool --rpc-url base_goerli --broadcast --verify
 forge script script/DeployCreditGuard.s.sol:DeployCreditGuard --rpc-url base_goerli --broadcast --verify
+```
+
+### Configure and Testing
+
+Next, create a Safe at https://app.safe.global/. Set the CreditGuard as the guard of the Safe using `setGuard` function of the deployed Safe contract.
+
+ABI of `setGuard`:
 
 ```
+{
+        "constant": false,
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "guard",
+                "type": "address"
+            }
+        ],
+        "name": "setGuard",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
+```
+
+Next, you can perform a leverage farming strategy using Safe Transaction Builder.
+
+1. Mint some `MockDAI` to the Safe as initial funds
+2. Borrow more tokens from `TokenPool`
+3. Approve `Farming` to spend tokens
+4. Deposit tokens to `Farming`
+
+`CreditGuard` post-transaction check will make sure that the Safe is not over-leveraged after the batch of transactions.
+
+If you try to borrow more funds that causes the health factor to be too low, the transaction will be reverted.
 
 ## Foundry
 
