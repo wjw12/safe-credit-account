@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 import "./Oracle.sol";
 import "./Farming.sol";
 import "./TokenPool.sol";
-import "./BaseGuard.sol";
 import "safe-contracts/contracts/common/Enum.sol";
+import "safe-contracts/contracts/common/StorageAccessible.sol";
+import {BaseGuard} from "safe-contracts/contracts/base/GuardManager.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract CreditGuard is BaseGuard {
@@ -17,6 +18,9 @@ contract CreditGuard is BaseGuard {
     uint public minHealthFactorBps = 11000;
 
     uint constant public BPS_BASE = 10000;
+
+    // keccak256("guard_manager.guard.address")
+    bytes32 internal constant GUARD_STORAGE_SLOT = 0x4a204f620c8c5ccdca3fd54d003badd85ba500436a431f0cbda4f558c93c34c8;
 
     constructor(address _farming, address _tokenPool, address _oracle) {
         pool = TokenPool(_tokenPool);
@@ -71,5 +75,14 @@ contract CreditGuard is BaseGuard {
 
     function checkAfterExecution(bytes32 txHash, bool success) external override {
         require(isHealthy(msg.sender), "CreditGuard: unhealthy");
+
+        // cannot set other guards
+        bytes memory data = StorageAccessible(msg.sender).getStorageAt(uint256(GUARD_STORAGE_SLOT), 1);
+        address guard;
+        // solhint-disable-next-line no-inline-assembly
+        assembly {
+            guard := mload(add(data, 0x20))
+        }
+        require(guard == address(this), "CreditGuard: cannot set other guards");
     }
 }

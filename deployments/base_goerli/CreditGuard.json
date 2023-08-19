@@ -1,5 +1,5 @@
 {
-  "address": "0x2BDE22c915A7407ec5FA520B859CCd289eEaBCF9",
+  "address": "0x55b98FE42f1C906e6533B1B33963571c50Aa4213",
   "abi": [
     {
       "inputs": [
@@ -280,7 +280,7 @@
           "type": "bool"
         }
       ],
-      "stateMutability": "pure",
+      "stateMutability": "view",
       "type": "function"
     }
   ]
