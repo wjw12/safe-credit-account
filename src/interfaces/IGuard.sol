@@ -1,6 +1,6 @@
 pragma solidity ^0.8.0;
 
-import "../Enum.sol";
+import "safe-contracts/contracts/common/Enum.sol";
 
 interface IGuard {
     function checkTransaction(

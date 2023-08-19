@@ -8,6 +8,7 @@ forge script script/DeployFarming.s.sol:DeployFarming --rpc-url base_goerli --br
 forge script script/DeployOracle.s.sol:DeployOracle --rpc-url base_goerli --broadcast --verify
 forge script script/DeployPool.s.sol:DeployPool --rpc-url base_goerli --broadcast --verify
 forge script script/DeployCreditGuard.s.sol:DeployCreditGuard --rpc-url base_goerli --broadcast --verify
+forge script script/DeployDebugGuard.s.sol.s.sol:DeployDebugGuard.s.sol --rpc-url base_goerli --broadcast --verify
 ```
 
 ### Configure and Testing
@@ -17,22 +18,21 @@ Next, create a Safe at https://app.safe.global/. Set the CreditGuard as the guar
 ABI of `setGuard`:
 
 ```
-{
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "guard",
-                "type": "address"
-            }
-        ],
-        "name": "setGuard",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    }
-]
+[{
+    "constant": false,
+    "inputs": [
+        {
+            "internalType": "address",
+            "name": "guard",
+            "type": "address"
+        }
+    ],
+    "name": "setGuard",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}]
 ```
 
 Next, you can perform a leverage farming strategy using Safe Transaction Builder.

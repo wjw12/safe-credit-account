@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 import "./Oracle.sol";
 import "./Farming.sol";
 import "./TokenPool.sol";
-import "./Enum.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./BaseGuard.sol";
+import "safe-contracts/contracts/common/Enum.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract CreditGuard is BaseGuard {
     Farming public farming;

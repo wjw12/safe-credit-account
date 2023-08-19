@@ -1,7 +1,7 @@
 pragma solidity ^0.8.0;
 
-import "./Enum.sol";
 import "./interfaces/IGuard.sol";
+import "safe-contracts/contracts/common/Enum.sol";
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
 abstract contract BaseGuard is IERC165 {
