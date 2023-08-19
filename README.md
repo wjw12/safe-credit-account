@@ -1,3 +1,16 @@
+## Usage
+
+### Deploy
+
+```shell
+forge script script/DeployTokens.s.sol:DeployTokens --rpc-url base_goerli --broadcast --verify
+forge script script/DeployFarming.s.sol:DeployFarming --rpc-url base_goerli --broadcast --verify
+forge script script/DeployOracle.s.sol:DeployOracle --rpc-url base_goerli --broadcast --verify
+forge script script/DeployPool.s.sol:DeployPool --rpc-url base_goerli --broadcast --verify
+forge script script/DeployCreditGuard.s.sol:DeployCreditGuard --rpc-url base_goerli --broadcast --verify
+
+```
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
@@ -48,7 +61,7 @@ $ anvil
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge script script/BaseScript.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
 ### Cast

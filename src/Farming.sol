@@ -1,20 +1,14 @@
 pragma solidity ^0.8.0;
 
-import "./Oracle.sol";
-import "./TokenPool.sol";
-import "openzeppelin/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Farming {
-    Oracle public oracle;
-    TokenPool public pool;
     IERC20 public stakingToken;
     IERC20 public receiptToken;
 
     mapping(address => uint256) public balances;
 
-    constructor(address _oracle, address _pool, address _stakingToken, address _receiptToken) {
-        oracle = Oracle(_oracle);
-        pool = TokenPool(_pool);
+    constructor(address _stakingToken, address _receiptToken) {
         stakingToken = IERC20(_stakingToken);
         receiptToken = IERC20(_receiptToken);
     }
